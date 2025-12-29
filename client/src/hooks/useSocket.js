@@ -7,7 +7,9 @@ export function useSocket(roomId) {
   useEffect(() => {
     if (!roomId) return;
 
-    socket.connect();
+    if (!socket.connected) {
+      socket.connect();
+    }
 
     socket.emit("join_room", roomId);
 
@@ -22,6 +24,7 @@ export function useSocket(roomId) {
   }, [roomId]);
 
   const updateDocument = (content) => {
+    setDocument(content);
     socket.emit("document_update", { roomId, content });
   };
 
