@@ -1,25 +1,16 @@
-import { Routes, Route, Link } from "react-router-dom";
-import Room from "./pages/Room";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import "./index.css";
+import { CopilotKit } from "@copilotkit/react-core";
 
-export default function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/room/:roomId" element={<Room />} />
-    </Routes>
-  );
-}
+ReactDOM.createRoot(document.getElementById("root")).render(
 
-function Home() {
-  const roomId = crypto.randomUUID().slice(0, 6);
+    <CopilotKit runtimeUrl="http://localhost:8000/copilot">
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+     </CopilotKit>
 
-  return (
-    <div style={{ padding: "40px" }}>
-      <h1>Hivemind AI</h1>
-      
-      <Link to={`/room/${roomId}`}>
-        Create Room
-      </Link>
-    </div>
-  );
-}
+);
